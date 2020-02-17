@@ -16,7 +16,7 @@ class MainTabBarController : UITabBarController {
     }
     
     func setUpTabBar() {
-        let newsVC = UINavigationController(rootViewController: NewsVC())
+        let newsVC = UINavigationController(rootViewController: NewsView())
         newsVC.tabBarItem = UITabBarItem(title: "News", image: nil, tag: 0) //(tabBarSystemItem: .bookmarks, tag: 0)
        //  newsVC.tabBarItem.image =
        //  newsVC.tabBarItem.selectedImage =

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsVC: UIViewController {
+class NewsView: UIViewController {
     
     var presenter: NewsPresenterProtocal?
     
@@ -58,7 +58,7 @@ class NewsVC: UIViewController {
 
 }
 
-extension NewsVC: UITableViewDataSource, UITableViewDelegate {
+extension NewsView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsFeed.count
