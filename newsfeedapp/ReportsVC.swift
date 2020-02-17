@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import PKHUD
 
 class ReportsVC: UIViewController {
     
    
-
+    override func viewDidAppear(_ animated: Bool) {
+        HUD.flash(.progress, delay: 3.0)
+    }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-       
-        self.view.backgroundColor = UIColor.green
-        
+        self.view.backgroundColor = .white //UIColor.lightGray
+        //HUD.flash(.success, delay: 3.0)
     }
      
 

@@ -8,11 +8,13 @@
 
 import Foundation
 
-class NewsPresenter: NewsPresenterProtocal {
-    weak var view: NewsViewProtocal?
+class NewsPresenter: NewsPresenterProtocol {
+    var wireFrame: WireFrameProtocol?
+    
+    weak var view: NewsViewProtocol?
     
     func viewDidLoad() {
-        
+        view?.showLoading()
     }
     
     

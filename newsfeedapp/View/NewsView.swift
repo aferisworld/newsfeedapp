@@ -11,7 +11,7 @@ import PKHUD
 
 class NewsView: UIViewController {
     
-    var presenter: NewsPresenterProtocal?
+    var presenter: NewsPresenterProtocol?
     
     private let newsFeed = NewsFeedAPI.getNewsFeed()
     
@@ -33,24 +33,23 @@ class NewsView: UIViewController {
     }
     
     func setUpTableView() {
-        
-       // self.alertsTableView.frame =  CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height)
-        // self.alertsTableView.backgroundColor = .yellow
-        
+
         self.registerXIBs()
-        
+
         self.view.addSubview(self.newsTableView)
-        
+
         self.newsTableView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.newsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         self.newsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         self.newsTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         self.newsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
+
         self.newsTableView.delegate = self
         self.newsTableView.dataSource = self
-        
+
+        self.newsTableView.isHidden = true
+
     }
     
     func registerXIBs(){
@@ -61,11 +60,10 @@ class NewsView: UIViewController {
 }
 
 extension NewsView: UITableViewDataSource, UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsFeed.count
     }
-   
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 272
@@ -76,10 +74,10 @@ extension NewsView: UITableViewDataSource, UITableViewDelegate {
                 cell.newsFeed = newsFeed[indexPath.row]
                 return cell
     }
- 
+
 }
 
-extension NewsView: NewsViewProtocal {
+extension NewsView: NewsViewProtocol {
     
     func showFeed(with newsfeed: [NewsFeed]) {
         //
@@ -90,7 +88,12 @@ extension NewsView: NewsViewProtocal {
     }
     
     func showLoading() {
-         HUD.show(.progress)
+        self.newsTableView.isHidden = true
+        HUD.flash(.progress, delay: 3.0)
+        let deadlineTime = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.newsTableView.isHidden = false
+        })
     }
     
     func hideLoading() {
