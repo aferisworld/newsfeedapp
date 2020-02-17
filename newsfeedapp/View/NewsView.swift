@@ -26,7 +26,8 @@ class NewsView: UIViewController {
         // navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "News"
         
-         setUpTableView()
+        presenter?.viewDidLoad()
+        setUpTableView()
         
     }
     
@@ -75,4 +76,25 @@ extension NewsView: UITableViewDataSource, UITableViewDelegate {
                 return cell
     }
  
+}
+
+extension NewsView: NewsViewProtocal {
+    
+    func showFeed(with newsfeed: [NewsFeed]) {
+        //
+    }
+    
+    func showError() {
+        //
+    }
+    
+    func showLoading() {
+        //
+    }
+    
+    func hideLoading() {
+        //
+    }
+    
+    
 }

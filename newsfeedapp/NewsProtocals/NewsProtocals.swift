@@ -13,6 +13,12 @@ protocol NewsViewProtocal: class {
     
     //PRESENTER -> VIEW
     func showFeed(with newsfeed:[NewsFeed])
+    
+    func showError()
+    
+    func showLoading()
+    
+    func hideLoading()
 }
 
 protocol NewsPresenterProtocal: class {
@@ -20,4 +26,9 @@ protocol NewsPresenterProtocal: class {
     var view: NewsViewProtocal? { get set }
     //interactor
     //wireFrame
+    
+    //VIEW -> PRESENTER
+    func viewDidLoad()
+    
+    
 }
