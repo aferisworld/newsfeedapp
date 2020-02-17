@@ -85,7 +85,7 @@ class NewsTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        debugPrint("Don't call this method")
+        // debugPrint("Don't call this method")
     }
 
     override func awakeFromNib() {

@@ -10,10 +10,13 @@ import UIKit
 
 class NewsVC: UIViewController {
     
+    var presenter: NewsPresenterProtocal?
+    
     private let newsFeed = NewsFeedAPI.getNewsFeed()
     
     
     let newsTableView =  UITableView()
+    
      
     override func viewDidLoad() {
         super.viewDidLoad()
