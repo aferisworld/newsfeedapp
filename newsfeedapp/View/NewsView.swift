@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PKHUD
 
 class NewsView: UIViewController {
     
@@ -85,15 +86,15 @@ extension NewsView: NewsViewProtocal {
     }
     
     func showError() {
-        //
+          HUD.flash(.label("Internet not connected"), delay: 2.0)
     }
     
     func showLoading() {
-        //
+         HUD.show(.progress)
     }
     
     func hideLoading() {
-        //
+         HUD.hide()
     }
     
     
