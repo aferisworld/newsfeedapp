@@ -19,12 +19,15 @@ class NewsWireFrame: WireFrameProtocol {
     class func createNewsModule(mainTabBarVC: MainTabBarController) -> UIViewController {
         
         if let view = mainTabBarVC.viewControllers?.first?.children.first as? NewsView {
-            let presenter: NewsPresenterProtocol = NewsPresenter()
+            let presenter: NewsPresenterProtocol & NewsInteractorOutputProtocol = NewsPresenter() 
+            let interactor: NewsInteractorInputProtocol = NewsInteractor()
             let wireFrame: WireFrameProtocol = NewsWireFrame()
             
             view.presenter = presenter
             presenter.view = view
             presenter.wireFrame = wireFrame
+            presenter.interactor = interactor
+            interactor.presenter = presenter
             
             return mainTabBarVC
         }

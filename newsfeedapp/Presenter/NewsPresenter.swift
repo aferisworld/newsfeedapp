@@ -8,13 +8,27 @@
 
 import Foundation
 
-class NewsPresenter: NewsPresenterProtocol {
-    var wireFrame: WireFrameProtocol?
+class NewsPresenter: NewsPresenterProtocol { 
+    var interactor: NewsInteractorInputProtocol?
     
     weak var view: NewsViewProtocol?
+    var wireFrame: WireFrameProtocol?
     
     func viewDidLoad() {
         view?.showLoading()
+        let deadlineTime = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.interactor?.fetchNewsFeed()
+        })
+        
+    }
+}
+
+extension NewsPresenter: NewsInteractorOutputProtocol {
+    
+    func didFetchNewsFeed(_ newsfeed: [NewsFeed]) {
+        view?.hideLoading()
+        view?.showFeed(with: newsfeed)
     }
     
     

@@ -13,12 +13,10 @@ class NewsView: UIViewController {
     
     var presenter: NewsPresenterProtocol?
     
-    private let newsFeed = NewsFeedAPI.getNewsFeed()
-    
+    var newsFeed: [NewsFeed] =  [] // NewsFeedAPI.getNewsFeed()
     
     let newsTableView =  UITableView()
     
-     
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,8 +25,9 @@ class NewsView: UIViewController {
         // navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "News"
         
-        presenter?.viewDidLoad()
         setUpTableView()
+        presenter?.viewDidLoad()
+        
         
     }
     
@@ -80,7 +79,9 @@ extension NewsView: UITableViewDataSource, UITableViewDelegate {
 extension NewsView: NewsViewProtocol {
     
     func showFeed(with newsfeed: [NewsFeed]) {
-        //
+        self.newsFeed = newsfeed
+        self.newsTableView.isHidden = false
+        self.newsTableView.reloadData()
     }
     
     func showError() {
@@ -89,15 +90,12 @@ extension NewsView: NewsViewProtocol {
     
     func showLoading() {
         self.newsTableView.isHidden = true
-        HUD.flash(.progress, delay: 3.0)
-        let deadlineTime = DispatchTime.now() + 3
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            self.newsTableView.isHidden = false
-        })
+        HUD.flash(.progress, delay: 3.0) 
     }
     
     func hideLoading() {
          HUD.hide()
+         self.newsTableView.isHidden = false
     }
     
     

@@ -10,7 +10,7 @@ import Foundation
 
 class NewsFeedAPI {
     
-    static func getNewsFeed() -> [NewsFeed] {
+    static func getNewsFeed() -> [NewsFeed]? {
         let feed = [
             NewsFeed(title: "Police on manhunt", subTitle: "for two who gang-raped 16-year-old", date: "13/1/2020", actionStatement: "Alert", imageName: "walkthrough_two"),
             NewsFeed(title: "Scrap dealer jailed 10 years for defilement", subTitle: "If you've ever come near a design mockup", date: "13/1/2020", actionStatement: "Alert", imageName: "walkthrough_two"),

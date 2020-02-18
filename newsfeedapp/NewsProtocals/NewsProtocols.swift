@@ -25,12 +25,28 @@ protocol NewsPresenterProtocol: class {
     //view
     var view: NewsViewProtocol? { get set }
     //interactor
-    
+    var interactor: NewsInteractorInputProtocol? { get set }
     //wireFrame
     var wireFrame: WireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func viewDidLoad()
+    func viewDidLoad() 
+    
+}
+
+protocol NewsInteractorInputProtocol: class {
+    
+    var presenter: NewsInteractorOutputProtocol? { get set }
+    
+    // PRESENTER -> INTERACTOR
+    func fetchNewsFeed()
+    
+}
+
+protocol NewsInteractorOutputProtocol: class {
+    
+    // INTERACTOR -> PRESENTER
+    func didFetchNewsFeed(_ newsfeed: [NewsFeed])
     
 }
 
